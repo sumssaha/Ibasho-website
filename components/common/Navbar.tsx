@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import hamburgerIcon from "@/app/assets/hamburger.svg";
-import logo from "@/app/assets/logo.png";
 import { useState } from "react";
 import { Button } from "../ui/button";
 
@@ -22,7 +21,7 @@ export default function Navbar() {
       <nav className="w-full flex justify-between items-center container mx-auto my-2 px-4 md:px-2 ">
         <Link href="/" className="p-2 flex justify-between items-center">
           <Image
-            src={logo}
+            src="/Logo.svg"
             alt="logo"
             width={200}
             height={200}

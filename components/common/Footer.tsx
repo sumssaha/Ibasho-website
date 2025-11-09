@@ -5,7 +5,6 @@ import ytLogo from "@/app/assets/yt.svg";
 import instaLogo from "@/app/assets/insta.svg";
 import xLogo from "@/app/assets/x.svg";
 import Image from "next/image";
-import companyLogo from "@/app/assets/logo.png";
 
 export default function Footer() {
   const socialLinks = [
@@ -35,9 +34,11 @@ export default function Footer() {
       <div className="grid grid-cols-1 md:grid-cols-2  py-10 md:py-20 gap-6 md:gap-10">
         <div className="col-span-1 space-y-6 ">
           <Image
-            src={companyLogo}
+            src="/Logo.svg"
             className="w-40 h-auto md:w-40 mb-10"
             alt="Company Logo"
+            width={200}
+            height={200}
           />
           <div>
             <p className="font-semibold">Address:</p>
