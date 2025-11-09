@@ -1,0 +1,17 @@
+# *
+User-agent: *
+Allow: /
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+
+# Host
+Host: https://nectarindia.co.in
+
+# Sitemaps
+Sitemap: https://nectarindia.co.in/sitemap.xml
