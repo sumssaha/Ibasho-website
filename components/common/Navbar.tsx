@@ -50,7 +50,7 @@ export default function Navbar() {
           })}
         </div>
         <Link
-          href="/contact"
+          href="#contact"
           className="rounded-none hidden md:flex w-fit mx-auto md:mx-0 "
         >
           <Button

@@ -81,7 +81,10 @@ export default function ContactUsSection() {
   }
   return (
     <>
-      <section className="container mx-auto py-18 md:py-24 px-4 flex flex-col lg:flex-row justify-between items-center gap-14 md:gap-20">
+      <section
+        id="contact"
+        className="container mx-auto py-18 md:py-24 px-4 flex flex-col lg:flex-row justify-between items-center gap-14 md:gap-20"
+      >
         <div className="flex-1">
           <p className="text-accent font-semibold">Contact us</p>
           <h3 className="text-strong text-4xl md:text-5xl font-bold leading-12 md:leading-14 my-6">

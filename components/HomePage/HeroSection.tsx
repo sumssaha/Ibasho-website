@@ -6,16 +6,16 @@ import Link from "next/link";
 export default function HeroSection() {
   return (
     <section className="flex justify-between items-center lg:gap-10 xl:gap-36 flex-col md:flex-row">
-      <div className="flex-1 my-10 p-4 xl:p-8 2xl:ml-[11rem] max-w-xl">
-        <h1 className="text-4.5xl md:text-5.5xl font-bold text-strong leading-14  lg:leading-16 mb-4 md:mt-0">
+      <div className="flex-1 my-10 p-4 xl:p-8 2xl:ml-44 md:ml-14 ml-0 max-w-xl">
+        <h1 className="text-4.5xl lg:text-5.5xl font-bold text-strong leading-14  lg:leading-16 mb-4 md:mt-0">
           Safe Homes for the Ones Who Raised You
         </h1>
-        <p className="text-lg md:text-xl ">
+        <p className="text-lg lg:text-xl ">
           We transform houses into safe, comfortable spaces for aging parents,
           enabling independent living with confidence while giving you peace of
           mind from anywhere.
         </p>
-        <Link href="/contact" className="rounded-none flex w-fit my-6">
+        <Link href="#contact" className="rounded-none flex w-fit my-6">
           <Button
             type="button"
             variant="default"
