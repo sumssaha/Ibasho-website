@@ -5,7 +5,7 @@ export default function OurStory() {
   return (
     <section
       style={{ backgroundImage: `url(${renovationsImg.src})` }}
-      className="renovation-bg flex justify-center items-center bg-cover relative bg-center"
+      className="renovation-bg flex justify-center items-center bg-cover relative bg-center px-6"
     >
       <div className="absolute inset-0 bg-black opacity-50" />
       <div className="container py-12 md:py-28 text-primary z-1 flex flex-col md:flex-row px-4 md:px-0">
@@ -28,7 +28,7 @@ export default function OurStory() {
             parents age gracefully, comfortably, and confidently in the homes
             they love.
           </p>
-          <Link href="/" className="rounded-none flex w-fit ">
+          <Link href="#contact" className="rounded-none flex w-fit ">
             <Button
               type="button"
               variant="default"

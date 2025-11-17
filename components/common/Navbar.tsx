@@ -18,7 +18,7 @@ export default function Navbar() {
 
   return (
     <div className="relative">
-      <nav className="w-full flex justify-between items-center container mx-auto my-2 px-4 md:px-2 ">
+      <nav className="w-full flex justify-between items-center container mx-auto my-2 px-6">
         <Link href="/" className="p-2 flex justify-between items-center">
           <Image
             src="/Logo.svg"

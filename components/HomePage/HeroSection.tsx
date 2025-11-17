@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 export default function HeroSection() {
   return (
-    <section className="flex justify-between items-center lg:gap-10 xl:gap-36 flex-col md:flex-row">
+    <section className="flex justify-center items-center lg:gap-10 xl:gap-36 flex-col md:flex-row">
       <div className="flex-1 my-10 p-4 xl:p-8 2xl:ml-44 md:ml-14 ml-0 max-w-xl">
-        <h1 className="text-4.5xl lg:text-5.5xl font-bold text-strong leading-14  lg:leading-16 mb-4 md:mt-0">
+        <h1 className="text-4.5xl md:text-5xl lg:text-5.5xl font-bold text-strong leading-14  lg:leading-16 mb-4 md:mt-0">
           Safe Homes for the Ones Who Raised You
         </h1>
         <p className="text-lg lg:text-xl ">
@@ -25,7 +25,7 @@ export default function HeroSection() {
           </Button>
         </Link>
       </div>
-      <div className="flex-1 justify-items-end w-full">
+      <div className="flex-1 justify-items-end 2xl:justify-items-center">
         <Image
           src={heroImage}
           alt="heroImage"

@@ -13,20 +13,20 @@ export default function ServicesCardView() {
       subtitle:
         "Immediate peace of mind (grab bars, slip-resistant flooring, lighting)",
       image: essentialSafetyImg,
-      link: "/",
+      link: "#contact",
     },
     {
       title: "Comfort & Care",
       subtitle:
         "Accessibility + lifestyle upgrades (bathrooms, kitchens, ergonomic furniture).",
       image: comfortCareImg,
-      link: "/",
+      link: "#contact",
     },
     {
       title: "Elite Upgrade",
       subtitle: "Smart home safety, full redesign, project management",
       image: eliteUpgradeImg,
-      link: "/",
+      link: "#contact",
     },
   ];
 

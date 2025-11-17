@@ -8,13 +8,13 @@ import Image from "next/image";
 
 export default function HowItWorks() {
   return (
-    <section className="container mx-auto flex flex-col md:flex-row gap-18 md:gap-18 lg:gap-22 xl:gap-40 py-18 md:py-24">
+    <section className="container mx-auto flex flex-col md:flex-row gap-18 md:gap-18 lg:gap-22 xl:gap-40 py-18 md:py-24 px-6">
       <div className="flex-1 px-6 md:px-0">
         <p className="text-accent font-semibold">How it works</p>
         <h3 className="text-strong text-4xl md:text-5xl font-bold max-w-4xl pt-4 pb-8 md:leading-16 leading-12">
           Our Simple, Transparent Process
         </h3>
-        <Link href="/contact" className="rounded-none flex w-fit ">
+        <Link href="#contact" className="rounded-none flex w-fit ">
           <Button
             type="button"
             variant="default"

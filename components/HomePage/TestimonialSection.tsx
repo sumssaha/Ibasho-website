@@ -62,7 +62,7 @@ export default function TestimonialSection() {
   }, [api]);
 
   return (
-    <section className="container mx-auto relative py-18 md:py-24 px-4">
+    <section className="container mx-auto relative py-18 md:py-24 px-6">
       <h3 className="text-strong text-4xl md:text-5xl font-bold max-w-4xl leading-12 mb-6">
         What Families Say About Us
       </h3>

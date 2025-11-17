@@ -39,7 +39,7 @@ export default function Faq() {
   ];
 
   return (
-    <section className="container mx-auto py-18 md:py-24 px-4 text-center">
+    <section className="container mx-auto py-18 md:py-24 px-6 text-center">
       <h3 className="text-strong text-4xl md:text-5xl font-bold  leading-12 mb-6">
         Frequently Asked Questions
       </h3>
@@ -73,7 +73,7 @@ export default function Faq() {
         Still have questions?
       </h4>
       <p className="my-6 md:text-lg">We’re just a message away</p>
-      <Link href="/contact" className="rounded-none flex w-fit mx-auto">
+      <Link href="#contact" className="rounded-none flex w-fit mx-auto">
         <Button
           type="button"
           variant="default"

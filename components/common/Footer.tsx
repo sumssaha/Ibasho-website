@@ -30,7 +30,7 @@ export default function Footer() {
     },
   ];
   return (
-    <footer className="px-4 container mx-auto">
+    <footer className="px-6 container mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2  py-10 md:py-20 gap-6 md:gap-10">
         <div className="col-span-1 space-y-6 ">
           <Image

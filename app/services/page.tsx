@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function Services() {
   return (
     <>
-      <section className="container mx-auto flex flex-col justify-center items-center px-4 py-18 md:py-24 gap-4 md:gap-6">
+      <section className="container mx-auto flex flex-col justify-center items-center px-6 py-18 md:py-24 gap-4 md:gap-6">
         <h3 className="text-strong text-4.5xl md:text-5.5xl font-bold text-center leading-12 md:leading-16">
           <span className="text-accent">Tailored Solutions for</span> Every
           Stage of Care
@@ -25,7 +25,7 @@ export default function Services() {
         <ServicesCardView />
       </section>
       <section className="bg-strong py-24">
-        <div className="container mx-auto flex flex-col lg:flex-row justify-between lg:items-center px-4">
+        <div className="container mx-auto flex flex-col lg:flex-row justify-between lg:items-center px-6">
           <div className="max-w-3xl">
             <h3 className="text-primary text-3xl text-4.5xl font-bold">
               Your parent’s fall risk calculator
@@ -41,7 +41,7 @@ export default function Services() {
             </p>
           </div>
           <div>
-            <Link href="/contact" className="rounded-none flex w-fit my-6">
+            <Link href="/assessment" className="rounded-none flex w-fit my-6">
               <Button
                 type="button"
                 variant="default"
