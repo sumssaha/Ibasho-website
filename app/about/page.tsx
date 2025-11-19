@@ -96,18 +96,13 @@ export default function About() {
                 Ar. Pradip Sur - Founder & Principal Architect
               </h2>
               <p className="text-justify text-base md:text-lg">
-                Ar. Pradip Sur, an alumnus of NIT Calicut (2004), brings over
-                two decades of extensive experience in interior and
-                architectural design. While his portfolio spans diverse
-                industries and residential projects, he has significantly
-                specialized in the healthcare sector, successfully completing
-                several hospital projects. His profound understanding of
-                circulation layouts is particularly beneficial for disabled and
-                aged individuals, ensuring safety and accessibility. Ar. Sur is
-                recognized for his innovative character and compassionate
-                dedication to enhancing the safety, security, and
-                self-confidence of vulnerable populations through thoughtful
-                design and renovation.
+                Ar. Pradip Sur, Chief Aging-in-Place Architect, an alumnus of
+                NIT Calicut, brings over 20 years of experience in interior and
+                architectural design, with a strong specialization in healthcare
+                projects. He has led multiple hospital transformation
+                initiatives focused on safe circulation, accessibility, and
+                patient-friendly layouts—particularly benefiting elderly and
+                differently-abled individuals.
               </p>
             </div>
             <div className="">
@@ -131,16 +126,16 @@ export default function About() {
                 Litan Roy
               </h2>
               <p className="text-justify text-base md:text-lg">
-                Mr. Litan Roy, an engineering graduate, brings over 22 years of
-                diverse experience in executing large-scale projects across
-                Civil, Interior, and MEP works. He has successfully delivered
-                projects for esteemed clients including DMRC, Indian Railways,
-                NHAI, Formula One Roofing, Mumbai Airport, and Delhi Airport.
-                With a proven track record of managing major infrastructure and
-                construction projects with precision and quality assurance, Mr.
-                Roy has built a reputation for excellence and reliability. He
-                founded Nectar India with a vision to deliver projects that
-                embody Quality, Innovation, and Integrity.
+                Mr. Litan Roy, COO of Ibasho, is an engineering graduate with
+                22+ years of experience in Civil, Interior, and MEP works. He
+                has led multiple hospital interior transformation projects
+                focused on creating safer, accessible spaces for elderly and
+                differently-abled patients. With a strong background in
+                executing complex, safety-critical infrastructure for clients
+                such as DMRC, Indian Railways, and major airports, Mr. Roy
+                brings rigorous quality and operational discipline to every
+                project—ensuring Ibasho’s aging-in-place renovations meet
+                hospital-grade safety and accessibility standards.
               </p>
             </div>{" "}
           </div>

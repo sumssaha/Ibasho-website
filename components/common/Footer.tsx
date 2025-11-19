@@ -1,33 +1,30 @@
 import { Separator } from "../ui/separator";
-import fbLogo from "@/app/assets/fb.svg";
 import linkedinLogo from "@/app/assets/linkedin.svg";
-import ytLogo from "@/app/assets/yt.svg";
-import instaLogo from "@/app/assets/insta.svg";
-import xLogo from "@/app/assets/x.svg";
+
 import Image from "next/image";
 
 export default function Footer() {
   const socialLinks = [
-    {
-      image: fbLogo,
-      link: "https://www.fb.com",
-    },
-    {
-      image: instaLogo,
-      link: "https://www.instagram.com",
-    },
-    {
-      image: xLogo,
-      link: "https://www.x.com",
-    },
+    // {
+    //   image: fbLogo,
+    //   link: "https://www.fb.com",
+    // },
+    // {
+    //   image: instaLogo,
+    //   link: "https://www.instagram.com",
+    // },
+    // {
+    //   image: xLogo,
+    //   link: "https://www.x.com",
+    // },
     {
       image: linkedinLogo,
       link: "https://www.linkedin.com",
     },
-    {
-      image: ytLogo,
-      link: "https://www.youtube.com",
-    },
+    // {
+    //   image: ytLogo,
+    //   link: "https://www.youtube.com",
+    // },
   ];
   return (
     <footer className="px-6 container mx-auto">
@@ -41,10 +38,10 @@ export default function Footer() {
             height={200}
           />
           <div>
-            <p className="font-semibold">Address:</p>
+            {/* <p className="font-semibold">Address:</p>
             <address className="not-italic">
               Level 1, 12 Sample St, Sydney NSW 2000
-            </address>
+            </address> */}
           </div>
           <div>
             <p className="font-semibold">Contact:</p>
@@ -69,11 +66,11 @@ export default function Footer() {
           </div>
         </div>
         <div className="col-span-1 space-y-6">
-          <a className="font-semibold block">Link One</a>
+          {/* <a className="font-semibold block">Link One</a>
           <a className="font-semibold block">Link Two</a>
           <a className="font-semibold block">Link Three</a>
           <a className="font-semibold block">Link Four</a>
-          <a className="font-semibold block">Link Five</a>
+          <a className="font-semibold block">Link Five</a> */}
         </div>
       </div>
       <Separator orientation="horizontal" className="border-b-1 border-black" />
