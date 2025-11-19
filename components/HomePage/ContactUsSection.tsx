@@ -57,7 +57,7 @@ export default function ContactUsSection() {
     formData.append("Email", values.email);
     formData.append("Phone", values.phone ?? "");
     formData.append("Message", values.message);
-    formData.append("access_key", "");
+    formData.append("access_key", "b9a85f19-d131-4174-847b-0ea4bca1dfd4");
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       body: formData,
