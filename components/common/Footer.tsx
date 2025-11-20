@@ -46,8 +46,8 @@ export default function Footer() {
           </div>
           <div>
             <p className="font-semibold">Contact:</p>
-            <a href="tel:9959616978" className="underline block">
-              99596 16978
+            <a href="tel:+919959616978" className="underline block">
+              +91 99596 16978
             </a>
             <a
               href="mailto:safehome@ibasholiving.com"

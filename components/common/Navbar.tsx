@@ -50,7 +50,7 @@ export default function Navbar() {
           })}
         </div>
         <Link
-          href="#contact"
+          href="/#contact"
           className="rounded-none hidden md:flex w-fit mx-auto md:mx-0 "
         >
           <Button
@@ -73,7 +73,7 @@ export default function Navbar() {
         </Button>
       </nav>
       {showMenu && (
-        <div className="text-center bg-subtle opacity-95 space-y-6 absolute z-[11] w-full py-8 drop-shadow-2xl">
+        <div className="text-center bg-subtle opacity-95 space-y-6 absolute z-11 w-full py-8 drop-shadow-2xl">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
