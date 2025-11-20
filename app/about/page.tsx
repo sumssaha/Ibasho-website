@@ -109,7 +109,7 @@ export default function About() {
               <Image
                 src={founderImage}
                 alt="founder"
-                className="w-full max-w-xl"
+                className="w-full xl:max-w-lg lg:max-w-md"
               />
             </div>
           </div>
@@ -118,7 +118,7 @@ export default function About() {
               <Image
                 src={litanRoyImage}
                 alt="founder"
-                className="w-full max-w-xl"
+                className="w-full max-w-lg"
               />
             </div>
             <div className="space-y-10 flex-1 order-1 lg:order-2">

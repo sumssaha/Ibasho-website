@@ -1,5 +1,6 @@
 import { Separator } from "../ui/separator";
-import linkedinLogo from "@/app/assets/linkedin.svg";
+// import linkedinLogo from "@/app/assets/linkedin.svg";
+import instaLogo from "@/app/assets/insta.svg";
 
 import Image from "next/image";
 
@@ -9,18 +10,18 @@ export default function Footer() {
     //   image: fbLogo,
     //   link: "https://www.fb.com",
     // },
-    // {
-    //   image: instaLogo,
-    //   link: "https://www.instagram.com",
-    // },
+    {
+      image: instaLogo,
+      link: "https://www.instagram.com/ibasho_living",
+    },
     // {
     //   image: xLogo,
     //   link: "https://www.x.com",
     // },
-    {
-      image: linkedinLogo,
-      link: "https://www.linkedin.com",
-    },
+    // {
+    //   image: linkedinLogo,
+    //   link: "https://www.linkedin.com",
+    // },
     // {
     //   image: ytLogo,
     //   link: "https://www.youtube.com",
@@ -45,11 +46,14 @@ export default function Footer() {
           </div>
           <div>
             <p className="font-semibold">Contact:</p>
-            <a href="tel:1800124567" className="underline block">
-              1800 123 4567
+            <a href="tel:9959616978" className="underline block">
+              99596 16978
             </a>
-            <a href="mailto:email@example.com" className="underline block">
-              email@example.com
+            <a
+              href="mailto:safehome@ibasholiving.com"
+              className="underline block"
+            >
+              safehome@ibasholiving.com
             </a>
           </div>
           <div className="space-x-6 flex items-center mt-10">
@@ -73,7 +77,7 @@ export default function Footer() {
           <a className="font-semibold block">Link Five</a> */}
         </div>
       </div>
-      <Separator orientation="horizontal" className="border-b-1 border-black" />
+      <Separator orientation="horizontal" className="border-b border-black" />
       <div className="flex justify-between md:items-center items-start py-8 md:py-12 container mx-auto flex-col md:flex-row gap-5">
         <p className=" md:text-base order-2 md:order-1">
           &copy; {new Date().getFullYear()} Ibasho. All rights reserved.
@@ -85,9 +89,9 @@ export default function Footer() {
           <a href="/terms" className="underline">
             Terms of Service
           </a>
-          <a href="/cookies" className="underline">
+          {/* <a href="/cookies" className="underline">
             Cookie Settings
-          </a>
+          </a> */}
         </div>
       </div>
     </footer>
