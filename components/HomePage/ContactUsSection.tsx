@@ -277,18 +277,10 @@ export default function ContactUsSection() {
             Form Submitted
           </h6>
           <p className="font-poppins text-sm text-foreground">
-            Thank you for reaching out to Nectar India. Our team will review
-            your message and connect with you shortly to understand your
-            requirements better.
+            Thank you for reaching out to Ibasho. Our team will review your
+            message and connect with you shortly to understand your requirements
+            better.
           </p>
-          <Link href="/" className="mt-4 mx-auto rounded-full">
-            <Button
-              type="button"
-              className="rounded-full font-lora font-semibold text-lg bg-accent w-full h-full mx-auto hover:bg-accent/80 text-white cursor-pointer px-10"
-            >
-              Explore our work
-            </Button>
-          </Link>
         </AlertDialogContent>
       </AlertDialog>
     </>
