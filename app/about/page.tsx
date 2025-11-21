@@ -91,10 +91,13 @@ export default function About() {
         <p className="text-accent font-semibold">Meet the founders</p>
         <div className="space-y-20 lg:space-y-36 pt-10">
           <div className="flex justify-between items-center lg:items-start gap-10 flex-col lg:flex-row xl:gap-40">
-            <div className="space-y-10 flex-1">
+            <div className="space-y-5 flex-1">
               <h2 className="text-strong text-4xl md:text-5xl font-bold leading-12 md:leading-14">
-                Ar. Pradip Sur - Chief Aging-in-Place Architect
+                Ar. Pradip Sur
               </h2>
+              <h5 className="text-xl font-semibold text-neutral-700">
+                Chief Aging-in-Place Architect
+              </h5>
               <p className="text-justify text-base md:text-lg">
                 Ar. Pradip Sur, Chief Aging-in-Place Architect, an alumnus of
                 NIT Calicut, brings over 20 years of experience in interior and
@@ -104,6 +107,12 @@ export default function About() {
                 patient-friendly layouts—particularly benefiting elderly and
                 differently-abled individuals.
               </p>
+              <a
+                href="https://www.linkedin.com/in/ar-pradip-sur"
+                className="underline text-blue-500"
+              >
+                Linkedin
+              </a>
             </div>
             <div className="">
               <Image
@@ -121,10 +130,13 @@ export default function About() {
                 className="w-full max-w-lg"
               />
             </div>
-            <div className="space-y-10 flex-1 order-1 lg:order-2">
+            <div className="space-y-5 flex-1 order-1 lg:order-2">
               <h2 className="text-strong text-4xl md:text-5xl font-bold leading-12 md:leading-14">
-                Litan Roy, COO of Ibasho
+                Litan Roy
               </h2>
+              <h5 className="text-xl font-semibold text-neutral-700">
+                Chief Operating Officer
+              </h5>
               <p className="text-justify text-base md:text-lg">
                 Mr. Litan Roy, COO of Ibasho, is an engineering graduate with
                 22+ years of experience in Civil, Interior, and MEP works. He
@@ -137,6 +149,12 @@ export default function About() {
                 project—ensuring Ibasho’s aging-in-place renovations meet
                 hospital-grade safety and accessibility standards.
               </p>
+              <a
+                href="https://www.linkedin.com/in/litan-roy-20647041"
+                className="underline text-blue-500"
+              >
+                Linkedin
+              </a>
             </div>{" "}
           </div>
         </div>
