@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://nectarindia.co.in", // your domain
+  siteUrl: "https://ibasholiving.com", // your domain
   generateRobotsTxt: true, // generate robots.txt
   sitemapSize: 5000,
   changefreq: "daily",

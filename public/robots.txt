@@ -11,7 +11,7 @@ User-agent: Bingbot
 Allow: /
 
 # Host
-Host: https://nectarindia.co.in
+Host: https://ibasholiving.com
 
 # Sitemaps
-Sitemap: https://nectarindia.co.in/sitemap.xml
+Sitemap: https://ibasholiving.com/sitemap.xml

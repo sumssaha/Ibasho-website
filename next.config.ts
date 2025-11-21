@@ -53,18 +53,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  /* config options here */
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "maps.googleapis.com",
-        port: "",
-        pathname: "/maps/api/staticmap**",
-      },
-    ],
-  },
-  // output: "export",
 };
 
 export default nextConfig;
