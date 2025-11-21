@@ -93,7 +93,7 @@ export default function About() {
           <div className="flex justify-between items-center lg:items-start gap-10 flex-col lg:flex-row xl:gap-40">
             <div className="space-y-10 flex-1">
               <h2 className="text-strong text-4xl md:text-5xl font-bold leading-12 md:leading-14">
-                Ar. Pradip Sur - Founder & Principal Architect
+                Ar. Pradip Sur - Chief Aging-in-Place Architect
               </h2>
               <p className="text-justify text-base md:text-lg">
                 Ar. Pradip Sur, Chief Aging-in-Place Architect, an alumnus of
@@ -123,7 +123,7 @@ export default function About() {
             </div>
             <div className="space-y-10 flex-1 order-1 lg:order-2">
               <h2 className="text-strong text-4xl md:text-5xl font-bold leading-12 md:leading-14">
-                Litan Roy
+                Litan Roy, COO of Ibasho
               </h2>
               <p className="text-justify text-base md:text-lg">
                 Mr. Litan Roy, COO of Ibasho, is an engineering graduate with
