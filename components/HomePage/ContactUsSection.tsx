@@ -25,6 +25,7 @@ import submitSuccessImage from "@/app/assets/submit-success.png";
 import Link from "next/link";
 import { AlertDialogTitle } from "@radix-ui/react-alert-dialog";
 import contactImage from "@/app/assets/contact.jpg";
+import successImage from "@/app/assets/Success.svg";
 export default function ContactUsSection() {
   const [result, setResult] = useState("");
   const formSchema = z.object({
@@ -52,16 +53,16 @@ export default function ContactUsSection() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const formData = new FormData();
-    formData.append("Name", values.name);
-    formData.append("Email", values.email);
-    formData.append("Phone", values.phone ?? "");
-    formData.append("Message", values.message);
-    formData.append("access_key", "b9a85f19-d131-4174-847b-0ea4bca1dfd4");
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData,
-    });
+    // const formData = new FormData();
+    // formData.append("Name", values.name);
+    // formData.append("Email", values.email);
+    // formData.append("Phone", values.phone ?? "");
+    // formData.append("Message", values.message);
+    // formData.append("access_key", "b9a85f19-d131-4174-847b-0ea4bca1dfd4");
+    // const response = await fetch("https://api.web3forms.com/submit", {
+    //   method: "POST",
+    //   body: formData,
+    // });
     try {
       const jsonResponse = await response.json();
       if (jsonResponse.success) {
@@ -94,146 +95,169 @@ export default function ContactUsSection() {
             Your parents deserve comfort and dignity in their own home. You
             deserve peace of mind, no matter the distance.
           </p>
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit, onError)}
-              className="space-y-8 w-full"
-            >
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-normal">
-                      Name <span className="text-red-500">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        className="rounded-none border-black h-12"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-normal">
-                      Email <span className="text-red-500">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        autoComplete="email"
-                        className="rounded-none border-black h-12"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel htmlFor={field.name} className="font-normal">
-                      Mobile
-                    </FormLabel>
-                    <FormControl>
-                      <PhoneInput
-                        defaultCountry="in"
-                        value={field.value}
-                        ref={field.ref}
-                        name={field.name}
-                        disabled={field.disabled}
-                        onBlur={field.onBlur}
-                        onChange={(phone, meta) => {
-                          if (
-                            phone.trim() ===
-                            "+" + meta.country.dialCode.trim()
-                          ) {
-                            field.onChange(undefined);
-                          } else {
-                            field.onChange(phone);
-                          }
-                        }}
-                        className="w-full flex border bg-background focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50 dark:aria-invalid:ring-destructive/40 rounded-none border-black h-full py-1"
-                        inputClassName="w-full bg-transparent rounded-none  h-12"
-                        inputStyle={{
-                          border: "0",
-                        }}
-                        inputProps={{
-                          autoComplete: "tel",
-                          id: field.name,
-                          name: field.name,
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-normal">
-                      Message <span className="text-red-500">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <Textarea
-                        {...field}
-                        className="h-40 rounded-none border-black"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="terms"
-                render={({ field }) => (
-                  <FormItem className="flex items-center">
-                    <FormControl>
-                      <Checkbox
-                        id="terms"
-                        name="terms"
-                        checked={field.value}
-                        onCheckedChange={(checked) => field.onChange(checked)}
-                        className="data-[state=checked]:bg-accent border-black rounded-none w-5 h-5"
-                      />
-                    </FormControl>
-                    <Label
-                      htmlFor="terms"
-                      className="text-foreground font-normal gap-1"
-                    >
-                      I accept the
-                      <Link href="/terms" className="underline" target="_blank">
-                        Terms
-                      </Link>
-                    </Label>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button
-                type="submit"
-                className="bg-accent w-full rounded-none font-normal hover:bg-accent/80 cursor-pointer h-10"
+          {result === "Form Submitted Successfully" ? (
+            <div className="my-26">
+              <div className="p-6 relative w-fit mx-auto">
+                <div className="inset-0 bg-strong opacity-3 absolute  rounded-full"></div>
+                <Image src={successImage} alt="Success" className=" " />
+              </div>
+              <div className="mx-auto text-center">
+                <h5 className="text-strong font-bold text-4.5xl">Thank You!</h5>
+                <p className="text-lg my-4 max-w-md mx-auto ">
+                  We&apos;ve received your inquiry and our team will reach out
+                  to you shortly.
+                </p>
+                <p className="italic text-accent">
+                  Together, we&apos;ll make their home a safer place.
+                </p>
+              </div>
+            </div>
+          ) : (
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit, onError)}
+                className="space-y-8 w-full"
               >
-                Submit
-              </Button>
-            </form>
-          </Form>
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-normal">
+                        Name <span className="text-red-500">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          className="rounded-none border-black h-12"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-normal">
+                        Email <span className="text-red-500">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          autoComplete="email"
+                          className="rounded-none border-black h-12"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel htmlFor={field.name} className="font-normal">
+                        Mobile
+                      </FormLabel>
+                      <FormControl>
+                        <PhoneInput
+                          defaultCountry="in"
+                          value={field.value}
+                          ref={field.ref}
+                          name={field.name}
+                          disabled={field.disabled}
+                          onBlur={field.onBlur}
+                          onChange={(phone, meta) => {
+                            if (
+                              phone.trim() ===
+                              "+" + meta.country.dialCode.trim()
+                            ) {
+                              field.onChange(undefined);
+                            } else {
+                              field.onChange(phone);
+                            }
+                          }}
+                          className="w-full flex border bg-background focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50 dark:aria-invalid:ring-destructive/40 rounded-none border-black h-full py-1"
+                          inputClassName="w-full bg-transparent rounded-none  h-12"
+                          inputStyle={{
+                            border: "0",
+                          }}
+                          inputProps={{
+                            autoComplete: "tel",
+                            id: field.name,
+                            name: field.name,
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-normal">
+                        Message <span className="text-red-500">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea
+                          {...field}
+                          className="h-40 rounded-none border-black"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="terms"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center">
+                      <FormControl>
+                        <Checkbox
+                          id="terms"
+                          name="terms"
+                          checked={field.value}
+                          onCheckedChange={(checked) => field.onChange(checked)}
+                          className="data-[state=checked]:bg-accent border-black rounded-none w-5 h-5"
+                        />
+                      </FormControl>
+                      <Label
+                        htmlFor="terms"
+                        className="text-foreground font-normal gap-1"
+                      >
+                        I accept the
+                        <Link
+                          href="/terms"
+                          className="underline"
+                          target="_blank"
+                        >
+                          Terms
+                        </Link>
+                      </Label>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type="submit"
+                  className="bg-accent w-full rounded-none font-normal hover:bg-accent/80 cursor-pointer h-10"
+                >
+                  Submit
+                </Button>
+              </form>
+            </Form>
+          )}
         </div>
         <div className="flex-1 w-full md:h-[890px] relative">
           <Image
@@ -244,7 +268,7 @@ export default function ContactUsSection() {
           />
         </div>
       </section>
-      <AlertDialog
+      {/* <AlertDialog
         open={result === "Form Submitted Successfully"}
         onOpenChange={() => setResult("")}
       >
@@ -282,7 +306,7 @@ export default function ContactUsSection() {
             better.
           </p>
         </AlertDialogContent>
-      </AlertDialog>
+      </AlertDialog> */}
     </>
   );
 }
