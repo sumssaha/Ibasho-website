@@ -11,89 +11,21 @@ import dollarIcon from "@/app/assets/dollar.svg";
 import Image from "next/image";
 import AssessmentResultChip from "./AssessmentResultChip";
 import { Button } from "../ui/button";
-import { AssessmentData } from "@/app/services/page";
-import rightArrowIcon from "@/app/assets/black_right_arrow.png";
+import rightArrowIcon from "@/app/assets/black_right_arrow.svg";
 import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
+import axios from "axios";
+import { BASE_URL } from "@/app/url";
+import { toast } from "sonner";
 
 export default function AssessmentResult({
   riskLevel,
+  userId,
   resetAssessment,
 }: {
   riskLevel: string;
+  userId: number;
   resetAssessment: () => void;
 }) {
-  function determineRiskLevel(assessmentData: AssessmentData) {
-    let userScore = 0;
-    const {
-      age,
-      gender,
-      elder_friendly_home,
-      emergency_help_available,
-      can_walk_independently,
-      balance_issues,
-      vision_level,
-      had_falls_recently,
-    } = assessmentData;
-
-    //Age
-    if (age > 65) {
-      userScore += 5;
-    } else if (age >= 60 && age <= 65) {
-      userScore += 4.5;
-    } else {
-      userScore += 1;
-    }
-
-    //Gender
-    if (gender === "female") {
-      userScore += 0.5;
-    }
-
-    //Living Environment
-    if (elder_friendly_home === "no") {
-      userScore += 3;
-    }
-
-    //Emergency Help
-    if (emergency_help_available === "no") {
-      userScore += 1;
-    }
-
-    //Mobility
-    if (can_walk_independently === "no") {
-      userScore += 3;
-    }
-
-    //Health Condition
-    if (balance_issues === "yes") {
-      userScore += 3;
-    }
-
-    //Vision
-    if (vision_level === "mild_impaired") {
-      userScore += 0;
-    } else if (vision_level === "moderate_impaired") {
-      userScore += 1;
-    } else if (vision_level === "severe_impaired") {
-      userScore += 2;
-    }
-
-    //Fall History
-    if (had_falls_recently === "yes") {
-      userScore += 3;
-    }
-
-    const fallRiskPercentage = Math.abs((userScore / 20.5) * 100);
-
-    if (fallRiskPercentage >= 0 && fallRiskPercentage <= 30) {
-      return "low";
-    } else if (fallRiskPercentage >= 31 && fallRiskPercentage <= 50) {
-      return "moderate";
-    } else {
-      return "high";
-    }
-  }
   const impactOfFalls = [
     {
       icon: heartIcon,
@@ -127,11 +59,53 @@ export default function AssessmentResult({
     },
   ];
 
+  const requestPdfDownload = () => {
+    toast.info("Please wait...", {
+      position: "top-center",
+      richColors: true,
+    });
+
+    axios
+      .post(
+        BASE_URL + "/users/generateReport",
+        { userId },
+        {
+          responseType: "blob",
+        },
+      )
+      .then((response) => {
+        const blob = new Blob([response.data], {
+          type: "application/pdf",
+        });
+
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "assessment-report.pdf";
+        a.click();
+        toast.success("Downloading...", {
+          position: "top-center",
+          richColors: true,
+        });
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        toast.error("Unable to download PDF Report. Please contact support", {
+          position: "top-center",
+          richColors: true,
+        });
+        console.error(
+          "Unable to download PDF Report. Please contact support",
+          error,
+        );
+      });
+  };
   return (
     <>
       <Card className="container mx-auto flex  px-6 py-18 gap-4 md:gap-6 rounded-sm">
         <CardHeader className="flex flex-col space-y-4 px-16">
-          <div className="flex justify-between items-center w-full">
+          <div className="flex justify-between md:items-center w-full flex-col md:flex-row space-y-4 md:space-y-0">
             <div className="space-x-2 flex items-center ">
               <Image src={alertIcon} alt="Alert Icon" className="m-0" />
               <h3 className="text-strong font-bold">
@@ -142,7 +116,8 @@ export default function AssessmentResult({
             <Button
               type="button"
               variant="default"
-              className="px-2 rounded-none border border-solid border-strong hover:cursor-pointer hover:bg-accent/80 text-lg  py-5 font-normal outline-none text-strong font-semibold flex"
+              className="whitespace-normal px-2 rounded-none border border-solid border-strong hover:cursor-pointer hover:bg-accent/80 text-lg outline-none text-strong font-semibold flex py-10 sm:py-4"
+              onClick={requestPdfDownload}
             >
               <Image src={downloadIcon} alt="Download Icon" className="" />
               Download Report
@@ -165,17 +140,17 @@ export default function AssessmentResult({
               {impactOfFalls.map((impact) => (
                 <li
                   key={impact.title}
-                  className="flex items-start space-x-4 py-6 bg-[#F8F9FA] rounded-lg px-6"
+                  className="flex md:flex-row flex-col items-center md:items-start space-x-0 md:space-x-4 space-y-4 md:space-y-0 py-6 bg-[#F8F9FA] rounded-lg px-6"
                 >
-                  <div className="bg-strong rounded-lg p-3">
+                  <div className="bg-strong rounded-lg p-3 w-18 max-w-12 md:max-w-18 lg:max-w-12">
                     <Image
                       src={impact.icon}
                       alt={impact.title}
-                      className="m-0"
+                      className="m-0 w-full"
                     />
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-2 text-center md:text-left">
                     <h4 className="font-bold text-black">{impact.title}</h4>
                     <p className=" text-[#666666]">{impact.content}</p>
                   </div>
@@ -188,32 +163,42 @@ export default function AssessmentResult({
                 At Ibasho, we transform homes into safe, comfortable spaces
                 where your parents can age with dignity and independence.
               </p>
-              <div className="space-x-4 pt-4 flex item-center justify-center">
-                <Link href="#contact" className="rounded-lg flex w-fit ">
+              <div className="space-x-0 md:space-x-4 space-y-4 md:space-y-0 pt-4 flex items-center justify-center flex-col md:flex-row">
+                <Link
+                  href="#contact"
+                  className="rounded-lg flex w-full md:w-fit"
+                >
                   <Button
                     type="button"
                     variant="default"
-                    className="rounded-lg border border-solid border-strong hover:cursor-pointer hover:bg-accent/80 text-lg p-6 font-normal outline-none"
+                    className="text-sm w-full rounded-lg border border-solid border-strong hover:cursor-pointer hover:bg-accent/80 md:text-lg p-6 font-normal outline-none"
                   >
-                    Book a Free Consultation{" "}
-                    <Image
-                      src={rightArrowIcon}
-                      alt="Right Arrow Icon"
-                      className="m-0"
-                    />
+                    <span className="flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-center">
+                      <span className="">Book a Free</span>
+
+                      <span className="flex items-center gap-2 whitespace-nowrap">
+                        Consultation
+                        <Image
+                          src={rightArrowIcon}
+                          alt="Right Arrow Icon"
+                          className="shrink-0"
+                        />
+                      </span>
+                    </span>
                   </Button>
                 </Link>
 
                 <Button
                   onClick={() => {
-                    console.log("click");
                     resetAssessment();
                   }}
                   type="button"
                   variant="default"
-                  className="bg-transparent text-white rounded-lg border border-solid border-white hover:cursor-pointer hover:bg-accent/80 text-lg p-6 font-normal outline-none"
+                  className="text-sm whitespace-normal w-full md:w-fit bg-transparent text-white rounded-lg border border-solid border-white hover:cursor-pointer hover:bg-accent/80 md:text-lg p-6 font-normal outline-none"
                 >
-                  Take Assessment Again
+                  <span className="flex flex-wrap items-center justify-center wrap-break-words text-center">
+                    Take Assessment Again
+                  </span>
                 </Button>
               </div>
             </div>

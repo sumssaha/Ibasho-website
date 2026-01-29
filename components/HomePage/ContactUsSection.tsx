@@ -1,9 +1,17 @@
 "use client";
 
+import contactImage from "@/app/assets/contact.jpg";
+import successImage from "@/app/assets/Success.svg";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 import { z } from "zod";
+import { Button } from "../ui/button";
+import { Checkbox } from "../ui/checkbox";
 import {
   Form,
   FormControl,
@@ -12,20 +20,9 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { PhoneInput } from "react-international-phone";
-import "react-international-phone/style.css";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
-import { Checkbox } from "../ui/checkbox";
-import { useState } from "react";
-import { AlertDialog, AlertDialogContent } from "../ui/alert-dialog";
-import submitSuccessImage from "@/app/assets/submit-success.png";
-import Link from "next/link";
-import { AlertDialogTitle } from "@radix-ui/react-alert-dialog";
-import contactImage from "@/app/assets/contact.jpg";
-import successImage from "@/app/assets/Success.svg";
+import { Textarea } from "../ui/textarea";
 export default function ContactUsSection() {
   const [result, setResult] = useState("");
   const formSchema = z.object({
@@ -53,16 +50,16 @@ export default function ContactUsSection() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // const formData = new FormData();
-    // formData.append("Name", values.name);
-    // formData.append("Email", values.email);
-    // formData.append("Phone", values.phone ?? "");
-    // formData.append("Message", values.message);
-    // formData.append("access_key", "b9a85f19-d131-4174-847b-0ea4bca1dfd4");
-    // const response = await fetch("https://api.web3forms.com/submit", {
-    //   method: "POST",
-    //   body: formData,
-    // });
+    const formData = new FormData();
+    formData.append("Name", values.name);
+    formData.append("Email", values.email);
+    formData.append("Phone", values.phone ?? "");
+    formData.append("Message", values.message);
+    formData.append("access_key", "b9a85f19-d131-4174-847b-0ea4bca1dfd4");
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData,
+    });
     try {
       const jsonResponse = await response.json();
       if (jsonResponse.success) {

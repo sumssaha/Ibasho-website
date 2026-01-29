@@ -1,3 +1,3 @@
-const BASE_URL = "http://localhost:8000/api";
+const BASE_URL = "https://api.ibasholiving.com/api";
 
 export { BASE_URL };

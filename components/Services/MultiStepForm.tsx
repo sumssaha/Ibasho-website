@@ -1,16 +1,21 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import backArrow from "@/app/assets/back_arrow.svg";
+import forwardArrow from "@/app/assets/forward_arrow.svg";
+import infoIcon from "@/app/assets/info.svg";
+import { AssessmentData } from "@/app/services/page";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import Image from "next/image";
 import {
   FormControl,
   FormField,
@@ -18,11 +23,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import Image from "next/image";
-import forwardArrow from "@/app/assets/forward_arrow.svg";
-import backArrow from "@/app/assets/back_arrow.svg";
-import infoIcon from "@/app/assets/info.svg";
-import { AssessmentData } from "@/app/services/page";
 
 /* -----------------------------
    Zod Schemas per Step
@@ -69,7 +69,7 @@ export const stepSchemas = [
       ["normal", "mild_impaired", "moderate_impaired", "severe_impaired"],
       {
         message: "This field is required",
-      }
+      },
     ),
 
     had_falls_recently: z.enum(["yes", "no"], {
@@ -109,7 +109,7 @@ export default function MultiStepForm({
 
   const form = useForm({
     resolver: zodResolver(stepSchemas[step]),
-    mode: "onTouched",
+    mode: "onSubmit",
     shouldUnregister: false,
     defaultValues: {
       age: "",
@@ -168,9 +168,9 @@ export default function MultiStepForm({
                     placeholder="Enter age"
                     className="border border-solid border-black rounded-none w-1/3 h-12"
                   />
-                  {errors.age && (
+                  {(errors as any).age && (
                     <p className="text-sm text-destructive">
-                      {errors.age.message}
+                      {(errors as any).age.message}
                     </p>
                   )}
                 </div>

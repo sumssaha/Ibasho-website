@@ -96,10 +96,10 @@ export default function About() {
                 Ar. Pradip Sur
               </h2>
               <h5 className="text-xl font-semibold text-neutral-700">
-                Chief Aging-in-Place Architect
+                Chief Ageing-in-Place Architect
               </h5>
               <p className="text-justify text-base md:text-lg">
-                Ar. Pradip Sur, Chief Aging-in-Place Architect, an alumnus of
+                Ar. Pradip Sur, Chief Ageing-in-Place Architect, an alumnus of
                 NIT Calicut, brings over 20 years of experience in interior and
                 architectural design, with a strong specialization in healthcare
                 projects. He has led multiple hospital transformation
@@ -146,7 +146,7 @@ export default function About() {
                 executing complex, safety-critical infrastructure for clients
                 such as DMRC, Indian Railways, and major airports, Mr. Roy
                 brings rigorous quality and operational discipline to every
-                project—ensuring Ibasho’s aging-in-place renovations meet
+                project—ensuring Ibasho’s ageing-in-place renovations meet
                 hospital-grade safety and accessibility standards.
               </p>
               <a

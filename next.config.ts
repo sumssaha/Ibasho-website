@@ -9,7 +9,7 @@ const securityHeaders = [
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
       img-src 'self' data: https:;
       font-src 'self' https://fonts.gstatic.com;
-      connect-src 'self' https://api.web3forms.com/submit data:;
+      connect-src 'self' https://api.web3forms.com/submit https://api.ibasholiving.com data:;
       frame-src 'self' https://www.google.com https://www.youtube.com blob:;
       object-src 'none';
       base-uri 'self';

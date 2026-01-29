@@ -1,17 +1,17 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Dispatch, SetStateAction } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
 import { InputOTP, InputOTPSlot } from "@/components/ui/input-otp";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
+import forwardArrow from "@/app/assets/forward_arrow.svg";
+import Image from "next/image";
 import {
   FormControl,
   FormField,
@@ -19,8 +19,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import Image from "next/image";
-import forwardArrow from "@/app/assets/forward_arrow.svg";
 
 /* -----------------------------
    Zod Schemas per Step
@@ -38,14 +36,14 @@ export default function OtpVerificationForm({
   setOtp,
 }: {
   phoneOrEmail?: string;
-  setOtp: Dispatch<SetStateAction<number | null>>;
+  setOtp: Dispatch<SetStateAction<string | null>>;
 }) {
   const form = useForm({
     resolver: zodResolver(schema),
-    mode: "onTouched",
+    mode: "onSubmit",
     shouldUnregister: false,
     defaultValues: {
-      otp: undefined,
+      otp: "",
     },
   });
 
@@ -53,7 +51,6 @@ export default function OtpVerificationForm({
   const { isValid } = formState;
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
     setOtp(data.otp);
   });
 
@@ -77,7 +74,7 @@ export default function OtpVerificationForm({
                   .slice(3)
                   .split("")
                   .map(() => "x")
-                  .join("")
+                  .join(""),
               )}
         </p>
       </CardHeader>
@@ -102,7 +99,7 @@ export default function OtpVerificationForm({
                       >
                         <InputOTPSlot
                           index={0}
-                          className="rounded-none !rounded-l-none border-solid border-black border"
+                          className="rounded-none rounded-l-none! border-solid border-black border"
                         />
                         <InputOTPSlot
                           index={1}
@@ -114,7 +111,7 @@ export default function OtpVerificationForm({
                         />
                         <InputOTPSlot
                           index={3}
-                          className="rounded-none !rounded-r-none border-solid border-black border"
+                          className="rounded-none rounded-r-none! border-solid border-black border"
                         />
                       </InputOTP>
                     </FormControl>
@@ -124,18 +121,17 @@ export default function OtpVerificationForm({
               />
 
               <hr className="my-8" />
+              <Button
+                onClick={onSubmit}
+                disabled={!isValid}
+                className="w-full bg-accent text-white rounded-none h-10 px-6 space-x-1 disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-accent/80 cursor-pointer select-none"
+              >
+                Get Risk Score
+                <Image src={forwardArrow} alt="Next" width={16} height={16} />
+              </Button>
             </>
           </form>
         </FormProvider>
-
-        <Button
-          onClick={onSubmit}
-          disabled={!isValid}
-          className="w-full bg-accent text-white rounded-none h-10 px-6 space-x-1 disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-accent/80 cursor-pointer select-none"
-        >
-          Get Risk Score
-          <Image src={forwardArrow} alt="Next" width={16} height={16} />
-        </Button>
       </CardContent>
     </Card>
   );

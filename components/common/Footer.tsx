@@ -1,8 +1,7 @@
 import { Separator } from "../ui/separator";
-// import linkedinLogo from "@/app/assets/linkedin.svg";
-import instaLogo from "@/app/assets/insta.svg";
 
 import Image from "next/image";
+import CurrentYear from "./CurrentYear";
 
 export default function Footer() {
   const socialLinks = [
@@ -11,7 +10,7 @@ export default function Footer() {
     //   link: "https://www.fb.com",
     // },
     {
-      image: instaLogo,
+      image: "/insta.png",
       link: "https://www.instagram.com/ibasho_living",
     },
     // {
@@ -80,7 +79,7 @@ export default function Footer() {
       <Separator orientation="horizontal" className="border-b border-black" />
       <div className="flex justify-between md:items-center items-start py-8 md:py-12 container mx-auto flex-col md:flex-row gap-5">
         <p className=" md:text-base order-2 md:order-1">
-          &copy; {new Date().getFullYear()} Ibasho. All rights reserved.
+          &copy; <CurrentYear /> Ibasho. All rights reserved.
         </p>
         <div className="flex md:flex-row flex-col justify-between md:items-center space-y-4 md:space-y-0 md:space-x-8 order-1 md:order-2">
           <a href="/privacy-policy" className="underline">

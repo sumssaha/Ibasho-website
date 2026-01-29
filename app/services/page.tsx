@@ -1,16 +1,18 @@
 "use client";
 import ServicesCardView from "@/components/common/ServicesCardView";
 import ContactUsSection from "@/components/HomePage/ContactUsSection";
-import MultiStepForm from "@/components/Services/MultiStepForm";
 import AssessmentResult from "@/components/Services/AssessmentResult";
+import MultiStepForm from "@/components/Services/MultiStepForm";
+import OtpVerificationForm from "@/components/Services/OtpVerificationForm";
+import RequestOtpForm from "@/components/Services/RequestOTPForm";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
+import { detectInputType } from "@/helpers/utils";
+import axios from "axios";
 import { Metadata } from "next";
 import { useCallback, useEffect, useRef, useState } from "react";
-import RequestOtpForm from "@/components/Services/RequestOTPForm";
-import OtpVerificationForm from "@/components/Services/OtpVerificationForm";
-import axios from "axios";
+import { toast } from "sonner";
 import { BASE_URL } from "../url";
-import { detectInputType } from "@/helpers/utils";
 
 const metadata: Metadata = {
   title: "Our Services | Ibasho",
@@ -40,20 +42,23 @@ export type AssessmentData =
     };
 export default function Services() {
   const [startAssessmentClicked, setStartAssessmentClicked] = useState(false);
-  //TODO
-  const [assessmentData, setAssessmentData] = useState<AssessmentData | null>({
-    age: 3,
-  });
+
+  const [assessmentData, setAssessmentData] = useState<AssessmentData | null>(
+    null,
+  );
   const [riskLevel, setRiskLevel] = useState<string | null>(null);
-  //TODO
+
   const [userData, setUserData] = useState<{
     name: string;
     emailOrPhone: string;
-  } | null>({ name: "vish", emailOrPhone: "+91 7898868959" });
-  //TODO
-  const [shouldShowOtpVerify, setShouldShowOtpVerify] = useState(true);
-  const [otp, setOtp] = useState<number | null>(null);
+  } | null>(null);
+
+  const [shouldShowOtpVerify, setShouldShowOtpVerify] = useState(false);
+  const [otp, setOtp] = useState<string | null>(null);
   const inputType = useRef("invalid");
+  const userId = useRef(-1);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     if (userData != null) {
       inputType.current = detectInputType(userData.emailOrPhone);
@@ -62,58 +67,94 @@ export default function Services() {
 
       if (inputType.current === "phone") {
         urlSuffix = "/send-otp/phone";
-        body = { phone: userData.emailOrPhone };
+        body = { phone: userData.emailOrPhone, name: userData.name };
       } else if (inputType.current === "email") {
         urlSuffix = "/send-otp/email";
-        body = { email: userData.emailOrPhone };
+        body = { email: userData.emailOrPhone, name: userData.name };
       } else {
         return;
       }
-      //MAKe CORS policy in backedend to allow requests from localhost:3000 only
+      setIsLoading(true);
+
       axios
         .post(BASE_URL + urlSuffix, body)
         .then((response) => {
-          console.log("OTP sent successfully:", response.data);
           setShouldShowOtpVerify(true);
+          toast.success("OTP sent successfully", {
+            position: "top-center",
+            richColors: true,
+          });
         })
         .catch((error) => {
+          toast.error("Error sending OTP:" + error, {
+            position: "top-center",
+            richColors: true,
+          });
           console.error("Error sending OTP:", error);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     }
   }, [userData]);
 
   useEffect(() => {
     if (otp != null) {
-      const email =
-        inputType.current === "email" ? userData?.emailOrPhone : null;
-      const phone =
-        inputType.current === "phone" ? userData?.emailOrPhone : null;
-      axios
-        .post(BASE_URL + "/verify-otp", {
-          email,
-          phone,
+      let body = {};
+      if (inputType.current === "email") {
+        body = {
+          email: userData?.emailOrPhone,
+          name: userData?.name,
           otp,
-        })
-        .then((response) => {
-          console.log("OTP verified successfully:", response.data);
+        };
+      }
+      if (inputType.current === "phone") {
+        body = {
+          phone: userData?.emailOrPhone,
+          name: userData?.name,
+          otp,
+        };
+      }
+      setIsLoading(true);
 
-          axios
-            .post(BASE_URL + "/compute-risk-score", {
-              ...assessmentData,
-              name: userData?.name,
-              email,
-              phone,
-            })
-            .then((response) => {
-              console.log(response.data);
-              setRiskLevel(response.data);
-            })
-            .catch((error) => {
-              console.error("unable to compute score");
+      axios
+        .post(BASE_URL + "/verify-otp", body)
+        .then((response) => {
+          if (response.data.success) {
+            toast.success(response.data.message, {
+              position: "top-center",
+              richColors: true,
             });
+
+            axios
+              .post(BASE_URL + "/users/assessment", {
+                ...assessmentData,
+                userId: response.data.userId,
+              })
+              .then((res) => {
+                if (res.data.success) {
+                  setRiskLevel(res.data.riskLevel);
+                  userId.current = res.data.updatedUser.PK;
+                }
+                setIsLoading(false);
+              })
+              .catch((error) => {
+                toast.error("Unable to assess user. Please contact support", {
+                  position: "top-center",
+                  richColors: true,
+                });
+                console.error("unable to compute score");
+                setIsLoading(false);
+              });
+          }
         })
         .catch((error) => {
-          console.error("Error sending OTP:", error);
+          toast.error("Error verifying OTP:" + error, {
+            position: "top-center",
+            richColors: true,
+          });
+          setIsLoading(false);
+          console.error("Error verifying OTP:", error);
         });
     }
   }, [otp]);
@@ -123,6 +164,8 @@ export default function Services() {
     setUserData(null);
     setRiskLevel(null);
     setShouldShowOtpVerify(false);
+    setOtp(null);
+    userId.current = -1;
   }, []);
   return (
     <>
@@ -140,10 +183,16 @@ export default function Services() {
         <ServicesCardView />
       </section>
       <section className="bg-strong py-24">
-        {assessmentData != null ? (
+        {isLoading ? (
+          <div className="flex items-center flex-col text-white gap-6">
+            <Spinner className="size-8" />
+            Please Wait...
+          </div>
+        ) : assessmentData != null ? (
           riskLevel != null ? (
             <AssessmentResult
               riskLevel={riskLevel}
+              userId={userId.current}
               resetAssessment={resetAssessment}
             />
           ) : shouldShowOtpVerify ? (

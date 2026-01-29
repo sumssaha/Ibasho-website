@@ -1,16 +1,15 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Dispatch, SetStateAction } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import forwardArrow from "@/app/assets/forward_arrow.svg";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import Image from "next/image";
 import {
   FormControl,
   FormField,
@@ -18,11 +17,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import Image from "next/image";
-import forwardArrow from "@/app/assets/forward_arrow.svg";
-import backArrow from "@/app/assets/back_arrow.svg";
-import infoIcon from "@/app/assets/info.svg";
-import { AssessmentData } from "@/app/services/page";
 
 /* -----------------------------
    Zod Schemas 
@@ -33,9 +27,11 @@ const schema = z.object({
     (val) => {
       const isEmail = z.email().safeParse(val).success;
       const isPhone = /^\+[1-9]\d{1,14}$/.test(val);
-      return isEmail || isPhone;
+      // return isEmail || isPhone;
+      return isEmail;
     },
-    { message: "Enter a valid email or phone number" }
+    // { message: "Enter a valid email or phone number" },
+    { message: "Enter a valid email" },
   ),
 });
 
@@ -51,7 +47,7 @@ export default function RequestOtpForm({
 }) {
   const form = useForm({
     resolver: zodResolver(schema),
-    mode: "onTouched",
+    mode: "onSubmit",
     shouldUnregister: false,
     defaultValues: {
       name: undefined,
@@ -63,7 +59,6 @@ export default function RequestOtpForm({
   const { isValid } = formState;
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
     setUserData(data);
   });
 
@@ -90,6 +85,7 @@ export default function RequestOtpForm({
                     <FormControl>
                       <Input
                         {...field}
+                        value={field.value ?? ""}
                         className="rounded-none border-black h-12"
                       />
                     </FormControl>
@@ -104,13 +100,15 @@ export default function RequestOtpForm({
                 render={({ field }) => (
                   <FormItem className="space-y-2">
                     <FormLabel className="font-normal text-sm">
-                      Email or Phone Number (with country code){" "}
+                      Email
+                      {/* Email or Phone Number (with country code){" "} */}
                       <span className="text-red-500">*</span>
                     </FormLabel>
 
                     <FormControl>
                       <Input
                         {...field}
+                        value={field.value ?? ""}
                         className="rounded-none border-black h-12"
                       />
                     </FormControl>
