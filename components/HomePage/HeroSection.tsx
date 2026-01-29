@@ -11,7 +11,7 @@ export default function HeroSection() {
           Safe Homes for the Ones Who Raised You
         </h1>
         <p className="text-lg lg:text-xl ">
-          We transform houses into safe, comfortable spaces for aging parents,
+          We transform houses into safe, comfortable spaces for ageing parents,
           enabling independent living with confidence while giving you peace of
           mind from anywhere.
         </p>

@@ -24,7 +24,7 @@ export default function PrivacyPolicy() {
             committed to protecting your privacy. This Privacy Policy explains
             how we collect, use, disclose, and safeguard your information when
             you visit our website, use our Fall Risk Calculator, or engage with
-            our services related to aging-in-place home transformations.
+            our services related to ageing-in-place home transformations.
           </p>
         </div>
         <hr className="border-black" />

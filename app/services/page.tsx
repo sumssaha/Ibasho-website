@@ -177,7 +177,7 @@ export default function Services() {
         <p className="md:text-lg text-center max-w-4xl mb-14">
           Every home is different — and so are the needs of the people who live
           in it. <br /> At Ibasho, we bring design, safety, and empathy together
-          to make homes aging-friendly so your parents can live independently,
+          to make homes ageing-friendly so your parents can live independently,
           comfortably, and confidently
         </p>
         <ServicesCardView />
