@@ -40,6 +40,7 @@ export default function ContactUsSection() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: "onSubmit",
     defaultValues: {
       name: "",
       email: "",

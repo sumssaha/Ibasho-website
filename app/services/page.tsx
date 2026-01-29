@@ -182,7 +182,7 @@ export default function Services() {
         </p>
         <ServicesCardView />
       </section>
-      <section className="bg-strong py-24">
+      <section className="bg-strong py-24" id="risk-calculator">
         {isLoading ? (
           <div className="flex items-center flex-col text-white gap-6">
             <Spinner className="size-8" />

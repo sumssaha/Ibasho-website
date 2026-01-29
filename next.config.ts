@@ -53,6 +53,15 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/riskcalculator",
+        destination: "/services#risk-calculator",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
