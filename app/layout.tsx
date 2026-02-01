@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/next";
 // import Script from "next/script";
 
 const roboto = Roboto({
@@ -30,6 +31,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Toaster />
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
