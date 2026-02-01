@@ -81,8 +81,7 @@ export default function RequestOtpForm({
       countryCode: "",
     },
   });
-  const { errors } = form.formState;
-  console.log("Form Errors:", errors);
+
   const contactType = form.watch("contactType");
 
   const handleTypeChange = (val: "email" | "phone") => {
@@ -113,7 +112,6 @@ export default function RequestOtpForm({
     }
 
     setUserData(finalData);
-    console.log("Backend Payload:", finalData);
   });
 
   return (
