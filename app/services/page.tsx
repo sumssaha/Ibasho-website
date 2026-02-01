@@ -4,10 +4,11 @@ import ContactUsSection from "@/components/HomePage/ContactUsSection";
 import AssessmentResult from "@/components/Services/AssessmentResult";
 import MultiStepForm from "@/components/Services/MultiStepForm";
 import OtpVerificationForm from "@/components/Services/OtpVerificationForm";
-import RequestOtpForm from "@/components/Services/RequestOTPForm";
+import RequestOtpForm, {
+  UserFormData,
+} from "@/components/Services/RequestOTPForm";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { detectInputType } from "@/helpers/utils";
 import axios from "axios";
 import { Metadata } from "next";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -43,50 +44,61 @@ export type AssessmentData =
 export default function Services() {
   const [startAssessmentClicked, setStartAssessmentClicked] = useState(false);
 
-  const [assessmentData, setAssessmentData] = useState<AssessmentData | null>(
-    null,
-  );
+  const [assessmentData, setAssessmentData] = useState<AssessmentData | null>({
+    age: 42,
+  });
   const [riskLevel, setRiskLevel] = useState<string | null>(null);
 
-  const [userData, setUserData] = useState<{
-    name: string;
-    emailOrPhone: string;
-  } | null>(null);
+  const [userData, setUserData] = useState<UserFormData | null>(null);
 
   const [shouldShowOtpVerify, setShouldShowOtpVerify] = useState(false);
   const [otp, setOtp] = useState<string | null>(null);
-  const inputType = useRef("invalid");
+
   const userId = useRef(-1);
   const [isLoading, setIsLoading] = useState(false);
+  const [verificationId, setVerificationId] = useState<string | null>(null);
 
   useEffect(() => {
     if (userData != null) {
-      inputType.current = detectInputType(userData.emailOrPhone);
       let urlSuffix = "/send-otp/phone";
       let body = {};
 
-      if (inputType.current === "phone") {
+      if (userData.contactType === "phone") {
         urlSuffix = "/send-otp/phone";
-        body = { phone: userData.emailOrPhone, name: userData.name };
-      } else if (inputType.current === "email") {
-        urlSuffix = "/send-otp/email";
-        body = { email: userData.emailOrPhone, name: userData.name };
+        body = {
+          phoneNumber: userData.phone,
+          countryCode: userData.countryCode,
+          name: userData.name,
+        };
       } else {
-        return;
+        urlSuffix = "/send-otp/email";
+        body = { email: userData.email, name: userData.name };
       }
       setIsLoading(true);
 
       axios
         .post(BASE_URL + urlSuffix, body)
         .then((response) => {
-          setShouldShowOtpVerify(true);
-          toast.success("OTP sent successfully", {
-            position: "top-center",
-            richColors: true,
-          });
+          if (response.data.success) {
+            if (userData.contactType === "phone") {
+              const vId = response.data.verificationId || response.data;
+              setVerificationId(vId);
+            }
+            setShouldShowOtpVerify(true);
+            toast.success("OTP sent successfully", {
+              position: "top-center",
+              richColors: true,
+            });
+          } else {
+            toast.error("Error sending otp", {
+              position: "top-center",
+              richColors: true,
+            });
+          }
         })
         .catch((error) => {
-          toast.error("Error sending OTP:" + error, {
+          const msg = error.response?.data?.message || error.message;
+          toast.error("Error sending OTP:" + msg, {
             position: "top-center",
             richColors: true,
           });
@@ -101,18 +113,20 @@ export default function Services() {
   useEffect(() => {
     if (otp != null) {
       let body = {};
-      if (inputType.current === "email") {
+      if (userData?.contactType === "email") {
         body = {
-          email: userData?.emailOrPhone,
+          email: userData?.email,
           name: userData?.name,
           otp,
         };
       }
-      if (inputType.current === "phone") {
+      if (userData?.contactType === "phone") {
         body = {
-          phone: userData?.emailOrPhone,
+          phoneNumber: userData?.phone,
+          countryCode: userData?.countryCode,
           name: userData?.name,
           otp,
+          verificationId: verificationId,
         };
       }
       setIsLoading(true);
@@ -149,7 +163,8 @@ export default function Services() {
           }
         })
         .catch((error) => {
-          toast.error("Error verifying OTP:" + error, {
+          const msg = error.response?.data?.message || error.message;
+          toast.error("Error verifying OTP:" + msg, {
             position: "top-center",
             richColors: true,
           });
@@ -198,7 +213,7 @@ export default function Services() {
           ) : shouldShowOtpVerify ? (
             <OtpVerificationForm
               setOtp={setOtp}
-              phoneOrEmail={userData?.emailOrPhone}
+              phoneOrEmail={userData?.email || userData?.phone}
             />
           ) : (
             <RequestOtpForm setUserData={setUserData} />
