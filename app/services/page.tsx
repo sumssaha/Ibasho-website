@@ -44,9 +44,9 @@ export type AssessmentData =
 export default function Services() {
   const [startAssessmentClicked, setStartAssessmentClicked] = useState(false);
 
-  const [assessmentData, setAssessmentData] = useState<AssessmentData | null>({
-    age: 42,
-  });
+  const [assessmentData, setAssessmentData] = useState<AssessmentData | null>(
+    null,
+  );
   const [riskLevel, setRiskLevel] = useState<string | null>(null);
 
   const [userData, setUserData] = useState<UserFormData | null>(null);
